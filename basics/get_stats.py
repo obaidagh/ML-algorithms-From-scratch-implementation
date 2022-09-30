@@ -1,5 +1,4 @@
 def get_statistics(input_list):
-    # Write your code here.
     input_list = sorted(input_list)
     sum = 0.
     freq={}

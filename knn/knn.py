@@ -3,7 +3,7 @@ import math
 
 
 def predict_label(examples, features, k, label_key="is_intrusive"):
-    # Write your code here.
+    
     knn = find_k_nearest_neighbors(examples, features, k)
     vote = 0
     for i, dp in enumerate(knn):
@@ -21,7 +21,7 @@ def predict_label(examples, features, k, label_key="is_intrusive"):
 
 
 def find_k_nearest_neighbors(examples, features, k):
-    # Write your code here.
+
     distance = {}
     for dp in examples.keys():
         ecludiean = 0

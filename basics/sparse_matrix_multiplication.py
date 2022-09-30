@@ -1,5 +1,16 @@
+
+def non_zero_dict(matrix):
+    non_zero={}
+    for i in range(len(matrix)):
+        for j in range(len(matrix[0])):
+            if matrix[i][j]!=0:
+                non_zero[(i,j)]=(matrix[i][j])
+    return non_zero
+                
+
+
 def sparse_matrix_multiplication(matrix_a, matrix_b):
-    # Write your code here.
+
     b_Rows = len(matrix_b)
 
     a_Cols = len(matrix_a[0])
@@ -8,6 +19,7 @@ def sparse_matrix_multiplication(matrix_a, matrix_b):
 
     if  a_Cols!= b_Rows:
         return [[]]
+
     else:
         matrix_c= [([0]*b_Cols) for i in range(a_Rows)]
 
@@ -22,12 +34,3 @@ def sparse_matrix_multiplication(matrix_a, matrix_b):
                 if (k,j) in b_non_zero.keys():
                     matrix_c[i][j] += matrix_a[i][k] * matrix_b[k][j] 
         return matrix_c
-
-def non_zero_dict(matrix):
-    non_zero={}
-    for i in range(len(matrix)):
-        for j in range(len(matrix[0])):
-            if matrix[i][j]!=0:
-                non_zero[(i,j)]=(matrix[i][j])
-    return non_zero
-                

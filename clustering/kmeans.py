@@ -1,43 +1,17 @@
 import random
 import numpy as np
 
-class Centroid:
-    def __init__(self, pos):
-        self.pos = pos
-        self.nearest_points = set()
-
-def ecludiean_distance(features,other_features):
-
-    point1 = np.array(features)
-    point2 = np.array(other_features)
-    
-
-    temp = point1 - point2
-
-    sum_sq = np.dot(temp.T, temp)
-
-    return list(np.sqrt(sum_sq))
-
-def manhattan_distance(features, other_features):
-    absolute_differences = []
-    for i in range(len(features)):
-        absolute_differences.append(abs(features[i]-other_features[i]))
-    return sum(absolute_differences)
-
-def average_position(centroid,data):
-    no_features = len(data[0])
-    no_close_points = len(centroid.nearest_points)
-    average_in_dims = [0] * no_features
-    for i in range(no_features):
-        for id in centroid.nearest_points:
-
-            average_in_dims[i] += data[id][i]
-    return [dim/no_close_points for dim in average_in_dims]
+from helpers.distances import manhattan_distance,ecludiean_distance
+from helpers.postions import average_position
+from centroid import Centroid
 
 
 
 
-class k_means:
+
+
+
+class Kmeans:
 
     def __init__(self, no_clusters, random_state, iters, distance) -> None:
         distances_dict = {"manhattan": manhattan_distance,"ecludiean":ecludiean_distance}
@@ -47,8 +21,6 @@ class k_means:
         self.distance = distances_dict[distance]
         self.kcentroids=[]
         
-
-
 
 
 
@@ -73,8 +45,9 @@ class k_means:
 
             for i,centroid in enumerate(self.kcentroids):
                 centroid.pos = average_position(centroid,data)
-                if iter != self.iters:
-                    centroid.nearest_points.clear()
+                #if iter != self.iters:
+                #    centroid.nearest_points.clear()
+                centroid.nearest_points.clear()
             print(f"Finished {iter+1} iterations")
         self.kcentroids=self.kcentroids
         
